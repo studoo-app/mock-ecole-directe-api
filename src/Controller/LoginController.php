@@ -57,7 +57,6 @@ class LoginController implements \MockEcoleDirecteApi\Core\Controller\Controller
                             512,
                             JSON_THROW_ON_ERROR
                         );
-
                         return json_encode(array_replace_recursive($dataModelJson, $dataUserJson), JSON_THROW_ON_ERROR);
                     }
                 }
