@@ -9,11 +9,11 @@ Celui-ci est basé sur le projet [studoo/ecole-directe-api](https://github.com/s
 Ce rendre sur la page des [docker/bfoujols/mock-api-ecole-directe](https://hub.docker.com/r/bfoujols/mock-api-ecole-directe) et récupérer la dernière version. 
 
 ```bash
-docker pull bfoujols/mock-api-ecole-directe:<VERSION>
+docker pull bfoujols/mock-api-ecole-directe
 ```
 ## Démarage de l'image Docker
 ```bash
-docker run --name api-ecole-directe -p 9042:80 -d bfoujols/mock-api-ecole-directe:v0.1.0-alpha 
+docker run --name api-ecole-directe -p 9042:80 -d bfoujols/mock-api-ecole-directe
 ```
 
 Vous pouvez maintenant accéder à l'API via l'adresse http://localhost:9042 \
