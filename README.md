@@ -24,10 +24,12 @@ Ce mock auto-génère des données aléatoires pour les tokens authentifications
 
 | Login/Password     	     | Role              	 | Niveau              	 
 |--------------------------|----------------|-----------------------|
-| flore/test          	    | Etudiante    	 | BTS SIO 1 année       |
+| flore/test          	    | Etudiante    	 | BTS SIO 1 année A     |
+| julie/test          	    | Etudiante    	 | BTS SIO 1 année B     |
 | nico/test          	     | Etudiant    	 | BTS SIO 2 année       |
+| jeremy/test          	   | Etudiant    	 | MASTER 2              |
 | jbouvier/test          	 | Prof     	     | BTS SIO ADM           |
-
+| bdan/test          	     | Prof     	     | BTS SIO ADM           |
 
 ## Pour developper le mock
 Télécharger le projet depuis GitHub et se rendre dans le dossier
@@ -48,8 +50,14 @@ composer install
 
 ### Build
 ```bash
+docker-compose build --no-cache
+```
+
+### Start
+```bash
 docker-compose up -d
 ```
+
 
 ### Deploy sur Docker Hub
 
