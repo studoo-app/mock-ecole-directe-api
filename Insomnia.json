@@ -1,0 +1,81 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-04-13T20:49:36.888Z",
+  "__export_source": "insomnia.desktop.app:v2023.1.0",
+  "resources": [
+    {
+      "_id": "req_66b0b30b48e2441c8d51c4fca6409b92",
+      "parentId": "wrk_9e80fda306104119b8e2e665d2eddb1e",
+      "modified": 1681418614299,
+      "created": 1681383248003,
+      "url": "http://localhost:9042/v3/login",
+      "name": "AUTH",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "text/plain",
+        "text": "data={\"identifiant\":\"{% prompt 'Login', 'Login', '', '', false, true %}\",\"motdepasse\":\"{% prompt 'Password', 'Password', '', '', false, true %}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "text/plain"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1681383248003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_9e80fda306104119b8e2e665d2eddb1e",
+      "parentId": null,
+      "modified": 1681383240922,
+      "created": 1681383240922,
+      "name": "Mock API Ecole Directe",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_08a1b82f717c1ad5425d2279ef144cc067a1c261",
+      "parentId": "wrk_9e80fda306104119b8e2e665d2eddb1e",
+      "modified": 1681383240924,
+      "created": 1681383240924,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1681383240924,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_08a1b82f717c1ad5425d2279ef144cc067a1c261",
+      "parentId": "wrk_9e80fda306104119b8e2e665d2eddb1e",
+      "modified": 1681383240925,
+      "created": 1681383240925,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_0214a1ff9d82431f96dd9f65e12e7faf",
+      "parentId": "wrk_9e80fda306104119b8e2e665d2eddb1e",
+      "modified": 1681383240922,
+      "created": 1681383240922,
+      "fileName": "Mock API Ecole Directe",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
