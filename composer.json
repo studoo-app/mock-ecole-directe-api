@@ -1,0 +1,29 @@
+{
+    "name": "studoo/mock-ecole-directe-api",
+    "autoload": {
+        "psr-4": {
+            "MockEcoleDirecteApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Benoit Foujols",
+            "email": "Benoit.Foujols@ac-creteil.fr"
+        },
+        {
+            "name": "Studoo Community",
+            "homepage": "https://github.com/orgs/studoo-app/people"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "nikic/fast-route": "^1.3"
+    },
+    "scripts": {
+        "start": [  "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:9042 -t api"
+        ],
+        "docker-start": "docker compose up -d",
+        "docker-stop": "docker compose down"
+    }
+}
