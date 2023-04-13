@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  app:
+    container_name: mock-api-ecole-directe
+    build: ./docker/php
+    ports:
+      - "9042:80"
+#    volumes:
+#      - ./docker/php/vhosts:/etc/apache2/sites-enabled
+    restart: always
