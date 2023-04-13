@@ -16,7 +16,9 @@ docker pull bfoujols/mock-api-ecole-directe:<VERSION>
 docker run --name api-ecole-directe -p 9042:80 -d bfoujols/mock-api-ecole-directe:v0.1.0-alpha 
 ```
 
-Vous pouvez maintenant accéder à l'API via l'adresse http://localhost:9042
+Vous pouvez maintenant accéder à l'API via l'adresse http://localhost:9042 \
+Vous pouvez tester l'API via Insomnia :
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=MOCK%20API%20ECOLE%20DIRECTE&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fstudoo-app%2Fmock-ecole-directe-api%2Fmain%2FInsomnia.json)
 
 ## Utilisation de l'API Ecole Directe Mock
 
