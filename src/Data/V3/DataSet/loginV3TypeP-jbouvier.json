@@ -1,0 +1,30 @@
+{
+  "code": 200,
+  "token": "64578-c10c-42d9-80R8-45335",
+  "message": "",
+  "data": {
+    "accounts": [
+      {
+        "idLogin": 34867434,
+        "id": 294,
+        "uid": "758d8f00dzdz34zer4230c29893",
+        "identifiant": "jbouvier",
+        "typeCompte": "P",
+        "codeOgec": "0345587N",
+        "lastConnexion": "2023-03-13 15:54",
+        "civilite": "M.",
+        "prenom": "Julien",
+        "nom": "BOUVIER",
+        "email": "Julien.Bouvier@test.fr",
+        "nomEtablissement": "STUDOO-SCOLAIRE",
+        "socketToken": "EeRrTRZR46854ZERgerj42Z2+LgbjL4P1cOfE2P5no009saJkCUpSWRIRso8YvWzU/tgA==",
+        "profile": {
+          "nomEtablissement": "STUDOO-SCOLAIRE",
+          "idEtablissement": "0",
+          "telPortable": "07 11 81 23 83",
+          "email": "Julien.Bouvier@test.fr"
+        }
+      }
+    ]
+  }
+}

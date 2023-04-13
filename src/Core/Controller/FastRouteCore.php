@@ -6,7 +6,11 @@ use FastRoute\Dispatcher;
 
 class FastRouteCore
 {
-    public static function getDispatcher($dispatcher) {
+    /**
+     * @throws \JsonException
+     */
+    public static function getDispatcher($dispatcher)
+    {
 
         // Fetch method and URI from somewhere
         $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -22,13 +26,33 @@ class FastRouteCore
 
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 
+        // Pour récupérer des données de type text/plain
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'
+            && isset($_SERVER['CONTENT_TYPE'])
+            && $_SERVER['CONTENT_TYPE'] === 'text/plain') {
+            // Lire les données brutes de la requête
+            $routeInfo[2] = array_merge(
+                $routeInfo[2],
+                json_decode(
+                    str_replace(
+                        "data=",
+                        "",
+                        file_get_contents('php://input')),
+                    true,
+                    512,
+                    JSON_THROW_ON_ERROR
+                )
+            );
+        }
+
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
-                // ... 404 Not Found
+                header('HTTP/1.1 404 Bad Request');
+                echo "HTTP/1.1 404 Not Found Request";
+                break;
             case Dispatcher::METHOD_NOT_ALLOWED:
-                $allowedMethods = $routeInfo[1];
-                // TODO mettre les erreurs
-                // ... 405 Method Not Allowed
+                header('HTTP/1.1 400 Bad Request');
+                echo "HTTP/1.1 400 Bad Request";
                 break;
             case Dispatcher::FOUND:
                 $request->setHander($routeInfo[1])->setVars($routeInfo[2]);

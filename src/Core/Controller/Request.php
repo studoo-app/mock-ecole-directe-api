@@ -56,4 +56,19 @@ class Request
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getHttpMethod(): string
+    {
+        return $this->httpMethod;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoute(): string
+    {
+        return $this->route;
+    }
 }

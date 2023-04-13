@@ -22,11 +22,11 @@ Vous pouvez maintenant accéder à l'API via l'adresse http://localhost:9042
 
 Ce mock auto-génère des données aléatoires pour les tokens authentifications :
 
-| Login/Password     	      | Role              	 | Niveau              	 
-|---------------------------|----------------|-----------------------|
-| flore/test          	     | Etudiante    	 | BTS SIO 1 année       |
-| nico/test          	      | Etudiant    	 | BTS SIO 2 année       |
-| j.bouvier/test          	 | Prof     	     | BTS SIO ADM           |
+| Login/Password     	     | Role              	 | Niveau              	 
+|--------------------------|----------------|-----------------------|
+| flore/test          	    | Etudiante    	 | BTS SIO 1 année       |
+| nico/test          	     | Etudiant    	 | BTS SIO 2 année       |
+| jbouvier/test          	 | Prof     	     | BTS SIO ADM           |
 
 
 ## Pour developper le mock
