@@ -1,0 +1,133 @@
+#   _____         _     __ _ _
+# |_   _|_ _ ___| | __/ _(_) | ___
+#   | |/ _` / __| |/ / |_| | |/ _ \
+#   | | (_| \__ \   <|  _| | |  __/
+#   |_|\__,_|___/_|\_\_| |_|_|\___|
+#
+# https://taskfile.dev
+#
+
+version: '3'
+
+silent: true
+
+##
+## ===   Variables ==================================================
+##
+
+vars:
+  #
+  # TASKFILE
+  CONTRIBUTOR: "Benoit Foujols"
+  ENV: main
+  #
+  # SYSTEM
+  PWD: $PWD
+  #
+  # DOCKER
+  DOCKER: docker
+  DOCKER_FILE: docker-compose.yml
+  DOCKER_RUN: "{{.DOCKER}} run"
+  DOCKER_COMPOSE: "{{.DOCKER}} compose"
+  #
+  # COMPOSER
+  COMPOSER: composer
+  #
+  # PHP UNIT TOOLS
+  PHPUNIT: "php vendor/bin/phpunit"
+
+
+##
+## ===   TASKS ==================================================
+##
+
+tasks:
+  default:
+    cmds:
+      - task: help
+
+  ## === 🆘  HELP ==================================================
+
+  help:
+    desc: "Description des tâches disponibles"
+    cmds:
+      - echo " ";
+      - echo " 📦 YOUR SYSTEM ---------------------------------------------------------"
+      - echo "Version {{.VERSION}}"
+      - echo 'Your system "{{OS}}" / "{{ARCH}}"'
+      - echo " ";
+      - echo " 📦 ESSENTIAL TASK ---------------------------------------------------------"
+      - echo "* start               Start project exemple"
+      - echo "* stop                Stop project exemple"
+      - echo " ";
+      - echo " 🎛️ OTHER TASK ----------------------------------------------------------"
+      - task --list
+
+  ## === 🐋  DOCKER ================================================
+
+  docker-up:
+    desc: "Start docker containers"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} up -d"
+
+  docker-stop:
+    desc: "Stop docker containers"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} stop"
+
+  docker-down:
+    desc: "Stop and remove docker containers, networks.."
+    cmds:
+      - "{{.DOCKER_COMPOSE}} down"
+
+  docker-reset:
+    desc: "Stop and reset on your environment"
+    cmds:
+      - "{{.DOCKER_COMPOSE}} down -v"
+
+  ## === 📦  COMPOSER ==============================================
+
+  composer-install:
+    desc: "Install composer dependencies"
+    cmds:
+      - "{{.COMPOSER}} install"
+
+  composer-update:
+    desc: "Update composer dependencies"
+    cmds:
+      -  "{{.COMPOSER}} update"
+
+  composer-validate:
+    desc: Validate composer.json file.
+    cmds:
+      - "{{.COMPOSER}} validate"
+
+  composer-validate-deep:
+    desc: Validate composer.json and composer.lock files in strict mode.
+    cmds:
+      - "{{.COMPOSER}} validate --strict --check-lock"
+
+  ## === 🔎  TESTS =================================================
+
+  tests:
+    desc: "Run tests"
+    cmds:
+      - "{{.PHPUNIT}} --testdox"
+
+  tests-coverage:
+    desc: "Run tests with coverage"
+    cmds:
+      - "{{.PHPUNIT}} --testdox tests --coverage-clover clover.xml"
+
+  ## === ⭐  OTHERS =================================================
+
+  before-commit:
+    desc: "Run before commit"
+    cmds:
+      - task: tests
+
+  start:
+    desc: "Start project exemple"
+    cmds:
+      - |
+        Composer start
