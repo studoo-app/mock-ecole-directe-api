@@ -22,7 +22,21 @@
           "nomEtablissement": "STUDOO-SCOLAIRE",
           "idEtablissement": "0",
           "telPortable": "06 22 81 23 33",
-          "email": "bdan@test.fr"
+          "email": "bdan@test.fr",
+          "classes": [
+            {
+              "id": 150,
+              "code": "1TSSIOB",
+              "libelle": "1 TS SIO B",
+              "idGroupe": 0
+            },
+            {
+              "id": 107,
+              "code": "1TSSIOA",
+              "libelle": "1 TS SIO A",
+              "idGroupe": 0
+            }
+          ]
         }
       }
     ]

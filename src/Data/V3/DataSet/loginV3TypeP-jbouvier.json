@@ -22,7 +22,27 @@
           "nomEtablissement": "STUDOO-SCOLAIRE",
           "idEtablissement": "0",
           "telPortable": "07 11 81 23 83",
-          "email": "Julien.Bouvier@test.fr"
+          "email": "Julien.Bouvier@test.fr",
+          "classes": [
+            {
+              "id": 102,
+              "code": "2TSSIOSLAM",
+              "libelle": "2TS SIO SLAM",
+              "idGroupe": 0
+            },
+            {
+              "id": 107,
+              "code": "1TSSIOA",
+              "libelle": "1 TS SIO A",
+              "idGroupe": 0
+            },
+            {
+              "id": 140,
+              "code": "MS2D2ALT",
+              "libelle": "Manager Solutions Digitals et Data 2ème année alternance",
+              "idGroupe": 0
+            }
+          ]
         }
       }
     ]
