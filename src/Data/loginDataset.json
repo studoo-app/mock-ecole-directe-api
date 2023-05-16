@@ -19,6 +19,13 @@
         "classes-id": 107
       },
       {
+        "identifiant": "paul",
+        "motdepasse": "test",
+        "typeCompte": "E",
+        "classes-code": "1TSSIOA",
+        "classes-id": 107
+      },
+      {
         "identifiant": "nico",
         "motdepasse": "test",
         "typeCompte": "E",
