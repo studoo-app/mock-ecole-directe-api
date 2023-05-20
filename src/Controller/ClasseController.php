@@ -15,30 +15,29 @@ use MockEcoleDirecteApi\Core\Controller\Request;
 
 class ClasseController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
 {
-
-    /**
-     * @throws \JsonException
-     */
     public function execute(Request $request): bool|string
     {
         $versionAPI = strtoupper($request->getVars()["api"]);
-        if ($versionAPI === "V3" && isset($request->getVars()["id"]) && $request->getHttpMethod() === "POST") {
+
+        if ($versionAPI === "V3"
+            && isset($request->getVars()["classe"])
+            && $request->getHttpMethod() === "POST"
+            && $request->getHearder()["X-Token"] === $_SESSION["token"]) {
             try {
 
                 // verifier le fichier
-                if (file_exists(__DIR__ . '/../Data/'.$versionAPI.'/DataSet/classe'.$versionAPI.'-'.$request->getVars()["id"].'.json')) {
-                    $classesModel = json_decode(
-                        file_get_contents(__DIR__ . '/../Data/'.$versionAPI.'/DataSet/classe'.$versionAPI.'-'.$request->getVars()["id"].'.json'),
-                        true,
-                        512,
-                        JSON_THROW_ON_ERROR
-                    );
-                    return json_encode($classesModel, JSON_THROW_ON_ERROR);
-                } else {
-                    return "{message: 'Not access in Id Classe API " . $request->getVars()["id"] ."'}";
-                }
+                $fileData = __DIR__ . '/../Data/' . $versionAPI .
+                    '/DataSet/classe' . $versionAPI . '-' . $request->getVars()["classe"] . '.json';
+                if (file_exists($fileData)
+                ) {
+                    $classesModel = json_decode(file_get_contents($fileData),true,512,JSON_THROW_ON_ERROR);
 
-                return "{message: 'Id is not available in API " . $versionAPI ."'}";
+                   $classesUser["token"] = $_SESSION["token"];
+
+                   return json_encode(array_replace_recursive($classesModel, $classesUser), JSON_THROW_ON_ERROR);
+                }
+                return "{message: 'Not access in Id Classe API " . $request->getVars()["classe"] ."'}";
+
             } catch (\JsonException $e) {
                 return "{message: '" . $e->getMessage() . "'}";
             }

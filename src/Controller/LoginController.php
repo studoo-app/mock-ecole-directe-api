@@ -12,13 +12,10 @@
 namespace MockEcoleDirecteApi\Controller;
 
 use MockEcoleDirecteApi\Core\Controller\Request;
+use MockEcoleDirecteApi\Core\TokenHandler;
 
 class LoginController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
 {
-
-    /**
-     * @throws \JsonException
-     */
     public function execute(Request $request): bool|string
     {
         if ($request->getVars()["api"] === "v3" && $request->getHttpMethod() === "POST") {
@@ -32,6 +29,7 @@ class LoginController implements \MockEcoleDirecteApi\Core\Controller\Controller
                 );
 
                 foreach ($loginJson["login"][$request->getVars()["api"]] as $login) {
+                    // Check Login
                     if ($login["identifiant"] === $request->getVars()["identifiant"]
                         && $login["motdepasse"] === $request->getVars()["motdepasse"]) {
 
@@ -57,11 +55,18 @@ class LoginController implements \MockEcoleDirecteApi\Core\Controller\Controller
                             512,
                             JSON_THROW_ON_ERROR
                         );
-                        return json_encode(array_replace_recursive($dataModelJson, $dataUserJson), JSON_THROW_ON_ERROR);
+
+                        $dataUserJson["token"] = TokenHandler::generate(26);
+                        $_SESSION["token"] = $dataUserJson["token"];
+
+                        return $_SESSION["login"] = json_encode(
+                            array_replace_recursive($dataModelJson, $dataUserJson),
+                            JSON_THROW_ON_ERROR
+                        );
                     }
                 }
                 return "{message: 'Login/Password is not available in API " . $versionAPI ."'}";
-            } catch (\JsonException $e) {
+            } catch (\JsonException|\Exception $e) {
                 return "{message: '" . $e->getMessage() . "'}";
             }
         }
