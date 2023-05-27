@@ -24,7 +24,6 @@ class ClasseController implements \MockEcoleDirecteApi\Core\Controller\Controlle
             && $request->getHttpMethod() === "POST"
             && $request->getHearder()["X-Token"] === $_SESSION["token"]) {
             try {
-
                 // verifier le fichier
                 $fileData = __DIR__ . '/../Data/' . $versionAPI .
                     '/DataSet/classe' . $versionAPI . '-' . $request->getVars()["classe"] . '.json';
@@ -42,7 +41,6 @@ class ClasseController implements \MockEcoleDirecteApi\Core\Controller\Controlle
                 return "{message: '" . $e->getMessage() . "'}";
             }
         }
-
         return "{message: 'Bad request to the mock API, Login is available only HTTP POST and API'}";
     }
 }

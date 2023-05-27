@@ -8,11 +8,11 @@
  * veuillez consulter le fichier LICENSE qui a été distribué avec ce code source.
  */
 
-
 namespace MockEcoleDirecteApi\Controller;
 
 use MockEcoleDirecteApi\Core\Controller\Request;
 use MockEcoleDirecteApi\Core\TokenHandler;
+use MockEcoleDirecteApi\Model\LoginModel;
 
 class LoginController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
 {
@@ -57,12 +57,14 @@ class LoginController implements \MockEcoleDirecteApi\Core\Controller\Controller
                         );
 
                         $dataUserJson["token"] = TokenHandler::generate(26);
-                        $_SESSION["token"] = $dataUserJson["token"];
-
-                        return $_SESSION["login"] = json_encode(
+                        $login = json_encode(
                             array_replace_recursive($dataModelJson, $dataUserJson),
                             JSON_THROW_ON_ERROR
                         );
+
+                        (new LoginModel())->addSession($dataUserJson["token"], $login);
+
+                        return $login;
                     }
                 }
                 return "{message: 'Login/Password is not available in API " . $versionAPI ."'}";
