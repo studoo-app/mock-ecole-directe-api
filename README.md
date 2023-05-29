@@ -24,6 +24,8 @@ Vous pouvez tester l'API via Insomnia :
 
 Ce mock auto-génère des données aléatoires pour les tokens authentifications :
 
+### API : /login
+
 | Login/Password     	     | Role              	 | Niveau              	    | Id Niveau     |
 |--------------------------|----------------|--------------------------|---------------|
 | flore/test          	    | Etudiante    	 | BTS SIO 1 année A (1TSSIOA) | 107           |
@@ -32,6 +34,12 @@ Ce mock auto-génère des données aléatoires pour les tokens authentifications
 | jeremy/test          	   | Etudiant    	 | MASTER 2 (MS2D2ALT)      | 140           |
 | jbouvier/test          	 | Prof     	     | BTS SIO ADM              | 107, 102, 140 |
 | bdan/test          	     | Prof     	     | BTS SIO ADM              | 107, 150      |
+
+### API : /classes
+
+| Login/Password     	     | Role              	 | Niveau              	    | Id Niveau     |
+|--------------------------|----------------|--------------------------|---------------|
+| jbouvier/test          	 | Prof     	     | BTS SIO ADM              | 107 |
 
 ## Pour developper le mock
 Télécharger le projet depuis GitHub et se rendre dans le dossier

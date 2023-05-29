@@ -12,6 +12,7 @@
 namespace MockEcoleDirecteApi\Controller;
 
 use MockEcoleDirecteApi\Core\Controller\Request;
+use MockEcoleDirecteApi\Model\LoginModel;
 
 class ClasseController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
 {
@@ -19,10 +20,12 @@ class ClasseController implements \MockEcoleDirecteApi\Core\Controller\Controlle
     {
         $versionAPI = strtoupper($request->getVars()["api"]);
 
+        $sessionDb = (new LoginModel())->getSession($request->getHearder()["X-Token"])["token"];
+
         if ($versionAPI === "V3"
             && isset($request->getVars()["classe"])
             && $request->getHttpMethod() === "POST"
-            && $request->getHearder()["X-Token"] === $_SESSION["token"]) {
+            && $request->getHearder()["X-Token"] === $sessionDb) {
             try {
                 // verifier le fichier
                 $fileData = __DIR__ . '/../Data/' . $versionAPI .
@@ -31,7 +34,7 @@ class ClasseController implements \MockEcoleDirecteApi\Core\Controller\Controlle
                 ) {
                     $classesModel = json_decode(file_get_contents($fileData),true,512,JSON_THROW_ON_ERROR);
 
-                   $classesUser["token"] = $_SESSION["token"];
+                   $classesUser["token"] = $sessionDb;
 
                    return json_encode(array_replace_recursive($classesModel, $classesUser), JSON_THROW_ON_ERROR);
                 }

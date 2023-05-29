@@ -23,7 +23,8 @@ class InitController implements \MockEcoleDirecteApi\Core\Controller\ControllerI
         $db->exec("CREATE TABLE IF NOT EXISTS users (
                                 id INTEGER PRIMARY KEY,
                                 token TEXT,
-                                login TEXT
+                                login TEXT,
+                                tokenExpiration DATETIME DEFAULT CURRENT_TIMESTAMP
                                 )
                             ");
 

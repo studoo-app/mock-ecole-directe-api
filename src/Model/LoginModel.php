@@ -15,12 +15,23 @@ use MockEcoleDirecteApi\Core\DatabaseService;
 
 class LoginModel
 {
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = DatabaseService::getConnect();
+    }
+
     public function addSession(string $token, string $login): void
     {
-        $db = DatabaseService::getConnect();
-        $stmt = $db->prepare("INSERT INTO users (token, login) VALUES (:token, :login)");
+        $stmt = $this->db->prepare("INSERT INTO users (token, login) VALUES (:token, :login)");
         $stmt->execute(['token' => $token, 'login' => $login]);
     }
 
-
+    public function getSession(string $token): mixed
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE token = :token");
+        $stmt->execute(['token' => $token]);
+        return $stmt->fetch();
+    }
 }
