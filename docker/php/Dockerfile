@@ -16,7 +16,9 @@ RUN apt-get update \
      libzip-dev \
      libonig-dev \
      libxslt-dev \
-     libssh-dev
+     libssh-dev \
+     sqlite3 \
+     libsqlite3-dev
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
@@ -30,7 +32,7 @@ RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
 #Docker extension
 RUN echo "Installation et configuration des extensions"
 RUN docker-php-ext-configure intl
-RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstring zip gd xsl
+RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite gd opcache intl zip calendar dom mbstring zip gd xsl
 RUN pecl install apcu xdebug && docker-php-ext-enable apcu xdebug
 
 #Ouverture des droits de lecture, modification et execution
