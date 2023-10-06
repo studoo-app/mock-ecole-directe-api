@@ -10,14 +10,10 @@
 
 namespace Controller;
 
+use Core\TokenHandler;
+use Model\LoginModel;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
-use Studoo\EduFramework\Core\View\TwigCore;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
-use app\Core\TokenHandler;
-use app\Model\LoginModel;
 
 class LoginController implements ControllerInterface
 {
@@ -25,6 +21,25 @@ class LoginController implements ControllerInterface
     {
         if ($request->getVars()["api"] === "v3" && $request->getHttpMethod() === "POST") {
             try {
+
+                // Pour récupérer des données de type text/plain
+                if ($_SERVER['REQUEST_METHOD'] === 'POST'
+                    && isset($_SERVER['CONTENT_TYPE'])
+                    && $_SERVER['CONTENT_TYPE'] === 'text/plain') {
+                    // Lire les données brutes de la requête
+                    $postTextPlain = json_decode(
+                        str_replace(
+                            "data=",
+                            "",
+                            file_get_contents('php://input')
+                        ),
+                        true,
+                        512,
+                        JSON_THROW_ON_ERROR
+                    );
+                }
+
+
                 $versionAPI = strtoupper($request->getVars()["api"]);
                 $loginJson = json_decode(
                     file_get_contents(__DIR__ . '/../Data/loginDataset.json'),
@@ -35,9 +50,8 @@ class LoginController implements ControllerInterface
 
                 foreach ($loginJson["login"][$request->getVars()["api"]] as $login) {
                     // Check Login
-                    var_dump($request->getVars());
-                    if ($login["identifiant"] === $request->getVars()["identifiant"]
-                        && $login["motdepasse"] === $request->getVars()["motdepasse"]) {
+                    if ($login["identifiant"] === $postTextPlain["identifiant"]
+                        && $login["motdepasse"] === $postTextPlain["motdepasse"]) {
 
                         $dataModelJson = json_decode(
                             file_get_contents(__DIR__ .

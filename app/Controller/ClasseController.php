@@ -11,12 +11,13 @@
 
 namespace Controller;
 
-use app\Core\Controller\Request;
-use app\Model\LoginModel;
+use Studoo\EduFramework\Core\Controller\ControllerInterface;
+use Studoo\EduFramework\Core\Controller\Request;
+use Model\LoginModel;
 
-class ClasseController implements \app\Core\Controller\ControllerInterface
+class ClasseController implements ControllerInterface
 {
-    public function execute(Request $request): bool|string
+    public function execute(Request $request): string|null
     {
         $versionAPI = strtoupper($request->getVars()["api"]);
 

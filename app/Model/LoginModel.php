@@ -9,9 +9,9 @@
  */
 
 
-namespace app\Model;
+namespace Model;
 
-use app\Core\DatabaseService;
+use Core\DatabaseService;
 
 class LoginModel
 {

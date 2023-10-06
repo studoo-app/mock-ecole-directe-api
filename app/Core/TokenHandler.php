@@ -9,7 +9,7 @@
  */
 
 
-namespace app\Core;
+namespace Core;
 
 use Exception;
 
