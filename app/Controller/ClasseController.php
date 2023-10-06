@@ -9,14 +9,15 @@
  */
 
 
-namespace MockEcoleDirecteApi\Controller;
+namespace Controller;
 
-use MockEcoleDirecteApi\Core\Controller\Request;
-use MockEcoleDirecteApi\Model\LoginModel;
+use Studoo\EduFramework\Core\Controller\ControllerInterface;
+use Studoo\EduFramework\Core\Controller\Request;
+use Model\LoginModel;
 
-class ClasseController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
+class ClasseController implements ControllerInterface
 {
-    public function execute(Request $request): bool|string
+    public function execute(Request $request): string|null
     {
         $versionAPI = strtoupper($request->getVars()["api"]);
 

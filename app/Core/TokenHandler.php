@@ -9,7 +9,7 @@
  */
 
 
-namespace MockEcoleDirecteApi\Core;
+namespace Core;
 
 use Exception;
 

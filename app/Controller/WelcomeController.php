@@ -9,14 +9,15 @@
  */
 
 
-namespace MockEcoleDirecteApi\Controller;
+namespace Controller;
 
-use MockEcoleDirecteApi\Core\Controller\Request;
+use Studoo\EduFramework\Core\Controller\ControllerInterface;
+use Studoo\EduFramework\Core\Controller\Request;
 
-class WelcomeController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
+class WelcomeController implements ControllerInterface
 {
 
-    public function execute(Request $request)
+    public function execute(Request $request): string|null
     {
         return "{message: 'Welcome to the mock API'}";
     }

@@ -9,14 +9,15 @@
  */
 
 
-namespace MockEcoleDirecteApi\Controller;
+namespace Controller;
 
-use MockEcoleDirecteApi\Core\Controller\Request;
-use MockEcoleDirecteApi\Core\DatabaseService;
+use Studoo\EduFramework\Core\Controller\ControllerInterface;
+use Studoo\EduFramework\Core\Controller\Request;
+use Core\DatabaseService;
 
-class InitController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
+class InitController implements ControllerInterface
 {
-    public function execute(Request $request): bool|string
+    public function execute(Request $request): string|null
     {
         $db = DatabaseService::getConnect();
 
