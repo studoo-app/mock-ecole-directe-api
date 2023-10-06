@@ -9,12 +9,12 @@
  */
 
 
-namespace MockEcoleDirecteApi\Controller;
+namespace Controller;
 
-use MockEcoleDirecteApi\Core\Controller\Request;
-use MockEcoleDirecteApi\Core\DatabaseService;
+use app\Core\Controller\Request;
+use app\Core\DatabaseService;
 
-class InitController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
+class InitController implements \app\Core\Controller\ControllerInterface
 {
     public function execute(Request $request): bool|string
     {

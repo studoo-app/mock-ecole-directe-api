@@ -22,6 +22,10 @@ if (version_compare(PHP_VERSION, '8.0', '<') === false) {
     )
     );
 
+    header("Content-type: application/json");
+    header("x-powered-by: ASP.NET");
+    header("x-http-host: HTTP84");
+    header("access-control-allow-origin: *");
     // Chargement des classes utilisées par l'application
     (new LoadCouchCore())->run();
 } else {

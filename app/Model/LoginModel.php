@@ -9,9 +9,9 @@
  */
 
 
-namespace MockEcoleDirecteApi\Model;
+namespace app\Model;
 
-use MockEcoleDirecteApi\Core\DatabaseService;
+use app\Core\DatabaseService;
 
 class LoginModel
 {

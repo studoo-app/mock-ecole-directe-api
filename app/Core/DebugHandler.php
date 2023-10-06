@@ -1,6 +1,6 @@
 <?php
 
-namespace MockEcoleDirecteApi\Core;
+namespace app\Core;
 
 class DebugHandler
 {

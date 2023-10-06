@@ -1,4 +1,16 @@
 index:
     uri: /
-    controller: Controller\HomeController
+    controller: Controller\WelcomeController
     httpMethod: [GET]
+init:
+    uri: /init
+    controller: Controller\InitController
+    httpMethod: [GET]
+login:
+    uri: /{api}/login
+    controller: Controller\LoginController
+    httpMethod: [POST]
+classe:
+    uri: /{api}/classes/{classe}/eleves
+    controller: Controller\ClasseController
+    httpMethod: [GET,POST]

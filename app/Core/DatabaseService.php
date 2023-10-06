@@ -1,6 +1,6 @@
 <?php
 
-namespace MockEcoleDirecteApi\Core;
+namespace app\Core;
 
 use Exception;
 use PDO;
@@ -16,7 +16,7 @@ class DatabaseService
     {
         if (!self::$dbConnect) {
             try {
-                self::$dbConnect = new PDO('sqlite:' . __DIR__ . '/ecoledirecte.db');
+                self::$dbConnect = new PDO('sqlite:' . __DIR__ . '/../ecoledirecte.db');
                 self::$dbConnect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Exception $e) {
                 die('Erreur : ' . $e->getMessage());

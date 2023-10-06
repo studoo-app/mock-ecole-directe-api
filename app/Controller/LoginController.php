@@ -8,15 +8,20 @@
  * veuillez consulter le fichier LICENSE qui a été distribué avec ce code source.
  */
 
-namespace MockEcoleDirecteApi\Controller;
+namespace Controller;
 
-use MockEcoleDirecteApi\Core\Controller\Request;
-use MockEcoleDirecteApi\Core\TokenHandler;
-use MockEcoleDirecteApi\Model\LoginModel;
+use Studoo\EduFramework\Core\Controller\ControllerInterface;
+use Studoo\EduFramework\Core\Controller\Request;
+use Studoo\EduFramework\Core\View\TwigCore;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use app\Core\TokenHandler;
+use app\Model\LoginModel;
 
-class LoginController implements \MockEcoleDirecteApi\Core\Controller\ControllerInterface
+class LoginController implements ControllerInterface
 {
-    public function execute(Request $request): bool|string
+    public function execute(Request $request): string|null
     {
         if ($request->getVars()["api"] === "v3" && $request->getHttpMethod() === "POST") {
             try {
@@ -30,6 +35,7 @@ class LoginController implements \MockEcoleDirecteApi\Core\Controller\Controller
 
                 foreach ($loginJson["login"][$request->getVars()["api"]] as $login) {
                     // Check Login
+                    var_dump($request->getVars());
                     if ($login["identifiant"] === $request->getVars()["identifiant"]
                         && $login["motdepasse"] === $request->getVars()["motdepasse"]) {
 
