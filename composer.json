@@ -20,7 +20,8 @@
         "nikic/fast-route": "^1.3",
         "studoo/edu-framework": "v0.4.2",
         "ext-pdo": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "fakerphp/faker": "^1.23"
     },
     "scripts": {
         "start": [
