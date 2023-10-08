@@ -1,0 +1,66 @@
+{
+  "organisation" : {
+    "v3" : {
+      "promo" : "2023-2024",
+      "classes" : {
+        "107" : {
+          "libelle" : "1 TS SIO A",
+          "code" : "1TSSIOA",
+          "etudiants" : {
+            "1" : {
+              "nom": "Boukari",
+              "prenom": "Abdoul",
+              "email": "test@test.fo",
+              "telPortable": "0606060606",
+              "sexe": "M",
+              "login": "ABOUKARI",
+              "idLogin" : "ABOUKARI",
+              "password": "ABOUKARI",
+              "uid": "98432dd9-c483-3669-a31e-153fec2eac72",
+              "tokenExpiration": "2023-10-08 10:10:03",
+              "lastConnexion": "2023-10-08 10:10:03",
+              "anneeScolaireCourante": "2020-2021"
+            }
+          }
+        },
+        "120" : {
+          "libelle" : "1 TS SIO B",
+          "code" : "1TSSIOB"
+        },
+        "134" : {
+          "libelle" : "1 TS SIO - année alternance",
+          "code" : "1TSSIOALT"
+        },
+        "109" : {
+          "libelle" : "2TS SIO SLAM",
+          "code" : "2TSSIOSLAM"
+        },
+        "130" : {
+          "libelle" : "2TS SIO SISR",
+          "code" : "2TSSIOSISR"
+        },
+        "152" : {
+          "libelle" : "2TS SIO SLAM - année alternance",
+          "code" : "2TSSIOSLAMALT"
+        },
+        "162" : {
+          "libelle" : "2TS SIO SISR - année alternance",
+          "code" : "2TSSIOSISRALT"
+        },
+        "140" : {
+          "libelle" : "Bachelor CSI - année alternance",
+          "code" : "CSIALT"
+        },
+        "148" : {
+          "libelle" : "Manager Solutions Digitals et Data 1ème - année alternance",
+          "code" : "MS2D1ALT"
+        },
+        "141" : {
+          "libelle" : "Manager Solutions Digitals et Data 2ème - année alternance",
+          "code" : "MS2D2ALT"
+        }
+      }
+    }
+  }
+
+}
