@@ -81,6 +81,7 @@ class InitController implements ControllerInterface
 
                 ##<< Insertion des etudiants dataset
                 if (array_key_exists('etudiants', $classe)) {
+                    foreach ($classe['etudiants'] as $etudiant)
                     $db->exec("INSERT INTO users (   idLogin, 
                                                                nom, 
                                                                prenom, 
@@ -95,20 +96,20 @@ class InitController implements ControllerInterface
                                                                tokenExpiration, 
                                                                lastConnexion, 
                                                                anneeScolaireCourante) 
-                                        VALUES (    '" . $classe['etudiants'][1]['idLogin'] . "',
-                                                    '" . $classe['etudiants'][1]['nom'] . "',
-                                                    '" . $classe['etudiants'][1]['prenom'] . "',
-                                                    '" . $classe['etudiants'][1]['telPortable'] . "',
-                                                    '" . $classe['etudiants'][1]['sexe'] . "', 
-                                                    '" . $classe['etudiants'][1]['email'] . "', 
+                                        VALUES (    '" . $etudiant['idLogin'] . "',
+                                                    '" . $etudiant['nom'] . "',
+                                                    '" . $etudiant['prenom'] . "',
+                                                    '" . $etudiant['telPortable'] . "',
+                                                    '" . $etudiant['sexe'] . "',
+                                                    '" . $etudiant['email'] . "',
                                                     '$typeCompte',
-                                                    '$idClasse', 
-                                                    '" . $classe['etudiants'][1]['login'] . "', 
-                                                    '" . $classe['etudiants'][1]['password'] . "',  
-                                                    '" . $classe['etudiants'][1]['uid'] . "',
-                                                    '" . $classe['etudiants'][1]['tokenExpiration'] . "',
-                                                    '" . $classe['etudiants'][1]['lastConnexion'] . "',
-                                                    '" . $classe['etudiants'][1]['anneeScolaireCourante'] . "'
+                                                    '$idClasse',
+                                                    '" . $etudiant['login'] . "',
+                                                    '" . $etudiant['password'] . "',
+                                                    '" . $etudiant['uid'] . "',
+                                                    '" . $etudiant['tokenExpiration'] . "',
+                                                    '" . $etudiant['lastConnexion'] . "',
+                                                    '" . $etudiant['anneeScolaireCourante'] . "'
                                                     )
                                                 ");
                 } ##>> Insertion des etudiants dataset
@@ -118,19 +119,10 @@ class InitController implements ControllerInterface
                 $posGenre = array_rand($genre);
                 $nbEleves = rand(15, 35);
                 for ($i = 0; $i < $nbEleves; $i++) {
-                    $idLogin = $faker->numberBetween(1000, 999999);
                     $nom = $faker->lastName($genre[$posGenre]);
                     $prenom = $faker->firstName($genre[$posGenre]);
-                    $telPortable = $faker->phoneNumber();
                     $sexe = strtoupper(substr($genre[$posGenre], 0, 1));
-                    $email = $faker->email();
-
                     $login = (new \Core\StandardRaw)->normalizeSRString(substr($prenom, 0, 1)).(new \Core\StandardRaw)->normalizeSRString($nom).$faker->numberBetween(1000, 9999);
-                    $password = "test";
-                    $uid = $faker->uuid();
-                    $tokenExpiration = date("Y-m-d H:i:s");
-                    $lastConnexion = date("Y-m-d H:i:s");
-                    $anneeScolaireCourante = $dataSet["organisation"]["v3"]["promo"];
                     $db->exec("INSERT INTO users (   idLogin, 
                                                                nom, 
                                                                prenom, 
@@ -138,29 +130,84 @@ class InitController implements ControllerInterface
                                                                sexe, 
                                                                email, 
                                                                typeCompte, 
-                                                               classeId, login, 
+                                                               classeId, 
+                                                               login, 
                                                                password, 
                                                                uid, 
                                                                tokenExpiration, 
                                                                lastConnexion, 
-                                                               anneeScolaireCourante) 
-                                        VALUES (    $idLogin, 
-                                                    '$nom', 
-                                                    '$prenom', 
-                                                    '$telPortable', 
-                                                    '$sexe', 
-                                                    '$email', 
-                                                    '$typeCompte', 
-                                                    '$idClasse', 
-                                                    '$login', 
-                                                    '$password', 
-                                                    '$uid', 
-                                                    '$tokenExpiration', 
-                                                    '$lastConnexion', 
-                                                    '$anneeScolaireCourante')
-                                                ");
+                                                               anneeScolaireCourante
+                                                               ) 
+                                            VALUES (    " . $faker->numberBetween(1000, 999999) . ",
+                                                        '$nom',
+                                                        '$prenom',
+                                                        '" . $faker->phoneNumber() . "',
+                                                        '$sexe',
+                                                        '" . $faker->email() . "',
+                                                        '$typeCompte',
+                                                        '$idClasse',
+                                                        '$login',
+                                                        'test',
+                                                        '" . $faker->uuid() . "',
+                                                        '" . date("Y-m-d H:i:s") . "',
+                                                        '" . date("Y-m-d H:i:s") . "',
+                                                        '" . $dataSet["organisation"]["v3"]["promo"] . "'
+                                                    )
+                                        ");
                 } ##>> Insertion des etudiants faker
-            } ##>> Insertion des conf dataset
+            } ##>> Insertion des users dans la classe
+
+            ##<< Insertion des professeurs dataset
+            foreach ($dataSet["organisation"]["v3"]["professeurs"] as $professeur) {
+
+                $idClassesTemp = [];
+                foreach (explode(",", $professeur['classes']) as $classe) {
+                    if (array_key_exists($classe, $dataSet["organisation"]["v3"]["classes"])) {
+                        $idClassesTemp[] = [
+                            "id" => $classe,
+                            "libelle" => $dataSet["organisation"]["v3"]["classes"][$classe]["libelle"],
+                            "code" => $dataSet["organisation"]["v3"]["classes"][$classe]["code"]
+                        ];
+                    }
+                }
+
+                $idClasse = json_encode($idClassesTemp, JSON_THROW_ON_ERROR);
+
+
+                $db->exec("INSERT INTO users (       idLogin, 
+                                                               nom, 
+                                                               prenom, 
+                                                               telPortable, 
+                                                               sexe, 
+                                                               email, 
+                                                               typeCompte,
+                                                               classeId,
+                                                               login, 
+                                                               password, 
+                                                               uid, 
+                                                               tokenExpiration, 
+                                                               lastConnexion, 
+                                                               anneeScolaireCourante
+                                                               ) 
+                                        VALUES (    '" . $professeur['idLogin'] . "',
+                                                    '" . $professeur['nom'] . "',
+                                                    '" . $professeur['prenom'] . "',
+                                                    '" . $professeur['telPortable'] . "',
+                                                    '" . $professeur['sexe'] . "',
+                                                    '" . $professeur['email'] . "',
+                                                    'P',
+                                                    '" . $idClasse . "',
+                                                    '" . $professeur['login'] . "',
+                                                    '" . $professeur['password'] . "',
+                                                    '" . $professeur['uid'] . "',
+                                                    '" . $professeur['tokenExpiration'] . "',
+                                                    '" . $professeur['lastConnexion'] . "',
+                                                    '" . $professeur['anneeScolaireCourante'] . "'
+                                                    )
+                                                ");
+            } ##>> Insertion des professeurs dataset
+
+
         }
 
         return "{message: 'initialisation the mock API Ecole Directe'}";
