@@ -10,8 +10,10 @@
 
 namespace Controller;
 
+use Core\DatabaseService;
 use Core\TokenHandler;
 use Model\LoginModel;
+use PDO;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
 use Studoo\EduFramework\Core\Controller\Request;
 
@@ -39,16 +41,45 @@ class LoginController implements ControllerInterface
                     );
                 }
 
-
+                $db = DatabaseService::getConnect();
                 $versionAPI = strtoupper($request->getVars()["api"]);
-                $loginJson = json_decode(
-                    file_get_contents(__DIR__ . '/../Data/loginDataset.json'),
-                    true,
-                    512,
-                    JSON_THROW_ON_ERROR
-                );
+                $stmt = $db->prepare("SELECT * FROM users WHERE login = :login AND password = :password");
+                $stmt->bindParam(':login', $postTextPlain["identifiant"]);
+                $stmt->bindParam(':password', $postTextPlain["motdepasse"]);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                foreach ($loginJson["login"][$request->getVars()["api"]] as $login) {
+               if ($user["login"] === $postTextPlain["identifiant"] && $user["password"] === $postTextPlain["motdepasse"]) {
+
+                   $dataModelJson = json_decode(
+                       file_get_contents(__DIR__ .
+                           '/../Data/' . $versionAPI .
+                           '/Model/login' . $versionAPI .
+                           'Type' . $user["typeCompte"] .
+                           '.json'),
+                       true,
+                       512,
+                       JSON_THROW_ON_ERROR
+                   );
+
+
+                   $dataModelJson["data"]["accounts"][0]["identifiant"] = $user["login"];
+                   var_dump($dataModelJson);
+
+
+                   $dataModelJson["token"] = TokenHandler::generate(26);
+                   $login = json_encode(
+                        $dataModelJson,
+                       JSON_THROW_ON_ERROR
+                   );
+
+                   (new LoginModel())->addSession($dataModelJson["token"], $login);
+
+                   return $login;
+               }
+
+
+/*                foreach ($loginJson["login"][$request->getVars()["api"]] as $login) {
                     // Check Login
                     if ($login["identifiant"] === $postTextPlain["identifiant"]
                         && $login["motdepasse"] === $postTextPlain["motdepasse"]) {
@@ -86,7 +117,9 @@ class LoginController implements ControllerInterface
 
                         return $login;
                     }
-                }
+                }*/
+
+
                 return "{message: 'Login/Password is not available in API " . $versionAPI ."'}";
             } catch (\JsonException|\Exception $e) {
                 return "{message: '" . $e->getMessage() . "'}";
