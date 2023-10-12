@@ -1,0 +1,28 @@
+index:
+    uri: /
+    controller: Controller\WelcomeController
+    httpMethod: [GET]
+datasetclasses:
+    uri: /dataset/classes
+    controller: Controller\DataSetClassesController
+    httpMethod: [GET]
+datasetetudiants:
+    uri: /dataset/etudiants
+    controller: Controller\DataSetEtudiantsController
+    httpMethod: [GET]
+datasetprof:
+    uri: /dataset/profs
+    controller: Controller\DataSetProfController
+    httpMethod: [GET]
+init:
+    uri: /init
+    controller: Controller\InitController
+    httpMethod: [GET]
+login:
+    uri: /{api}/login
+    controller: Controller\LoginController
+    httpMethod: [POST]
+classe:
+    uri: /{api}/classes/{classe}/eleves
+    controller: Controller\ClasseController
+    httpMethod: [GET,POST]

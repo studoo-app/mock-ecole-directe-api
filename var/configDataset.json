@@ -1,0 +1,129 @@
+{
+  "organisation" : {
+    "nomEtablissement" : "STUDOO SCHOOL",
+    "codeOgec" : "0345587-NC",
+    "v3" : {
+      "promo" : "2023-2024",
+      "classes" : {
+        "107" : {
+          "libelle" : "1 TS SIO A",
+          "code" : "1TSSIOA",
+          "etudiants" : {
+            "1" : {
+              "nom": "Peltier",
+              "prenom": "Flore",
+              "email": "fp@test.com",
+              "telPortable": "07 23 45 23 89",
+              "sexe": "F",
+              "login": "FPELTIER",
+              "idLogin" : "7647334",
+              "password": "test",
+              "uid": "98432dd9-c483-3669-a31e-153fec2eac72",
+              "tokenExpiration": "2023-10-08 10:10:03",
+              "lastConnexion": "2023-10-08 10:10:03",
+              "anneeScolaireCourante": "2020-2021"
+            },
+            "2" : {
+              "nom": "Torre",
+              "prenom": "Paul",
+              "email": "pt@test.com",
+              "telPortable": "06 33 45 33 89",
+              "sexe": "M",
+              "login": "PTORRE",
+              "idLogin": "7647680",
+              "password": "test",
+              "uid": "5cc74284-2b23-3bfb-a57c-16401d9d0f44",
+              "tokenExpiration": "2023-10-05 09:10:33",
+              "lastConnexion": "2023-10-06 11:00:54",
+              "anneeScolaireCourante": "2020-2021"
+            }
+          }
+        },
+        "120" : {
+          "libelle" : "1 TS SIO B",
+          "code" : "1TSSIOB"
+        },
+        "134" : {
+          "libelle" : "1 TS SIO - année alternance",
+          "code" : "1TSSIOALT"
+        },
+        "109" : {
+          "libelle" : "2TS SIO SLAM",
+          "code" : "2TSSIOSLAM"
+        },
+        "130" : {
+          "libelle" : "2TS SIO SISR",
+          "code" : "2TSSIOSISR"
+        },
+        "152" : {
+          "libelle" : "2TS SIO SLAM - année alternance",
+          "code" : "2TSSIOSLAMALT"
+        },
+        "162" : {
+          "libelle" : "2TS SIO SISR - année alternance",
+          "code" : "2TSSIOSISRALT"
+        },
+        "140" : {
+          "libelle" : "Bachelor CSI - année alternance",
+          "code" : "CSIALT",
+          "etudiants" : {
+            "1" : {
+              "nom": "Boullam",
+              "prenom": "Jeremy",
+              "email": "fp@test.com",
+              "telPortable": "09 00 00 77 92",
+              "sexe": "M",
+              "login": "JBOULLAM",
+              "idLogin" : "457675434",
+              "password": "test",
+              "uid": "d012a215-731b-3fe4-aa02-8afe742cc0a1",
+              "tokenExpiration": "2023-10-08 10:10:03",
+              "lastConnexion": "2023-10-08 10:10:03",
+              "anneeScolaireCourante": "2020-2021"
+            }
+          }
+        },
+        "148" : {
+          "libelle" : "Manager Solutions Digitals et Data 1ème - année alternance",
+          "code" : "MS2D1ALT"
+        },
+        "141" : {
+          "libelle" : "Manager Solutions Digitals et Data 2ème - année alternance",
+          "code" : "MS2D2ALT"
+        }
+      },
+      "professeurs" : {
+        "1": {
+          "nom": "Bouvier",
+          "prenom": "Julien",
+          "email": "Julien.Bouvier@test.fr",
+          "telPortable": "07 11 81 23 83",
+          "sexe": "M",
+          "login": "JBOUVIER",
+          "idLogin" : "34867434",
+          "password": "test",
+          "uid": "0f9fdc75-fd68-3fe0-8a09-1864f80025f7",
+          "tokenExpiration": "2023-10-08 10:10:03",
+          "lastConnexion": "2023-10-08 10:10:03",
+          "anneeScolaireCourante": "2020-2021",
+          "classes" : "107,120,134,140,141"
+        },
+        "2": {
+          "nom": "Dan",
+          "prenom": "Benjamin",
+          "email": "bdan@test.fr",
+          "telPortable": "06 22 81 23 33",
+          "sexe": "M",
+          "login": "BDAN",
+          "idLogin" : "63867346",
+          "password": "test",
+          "uid": "214fd929-c327-327b-aa13-19c0ea41d364",
+          "tokenExpiration": "2023-10-08 10:10:03",
+          "lastConnexion": "2023-10-08 10:10:03",
+          "anneeScolaireCourante": "2020-2021",
+          "classes" : "107,120"
+        }
+      }
+    }
+  }
+}
