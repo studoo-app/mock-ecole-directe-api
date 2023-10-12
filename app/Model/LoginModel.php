@@ -24,7 +24,7 @@ class LoginModel
 
     public function addSession(string $token, string $login): void
     {
-        $stmt = $this->db->prepare("INSERT INTO users (token, login) VALUES (:token, :login)");
+        $stmt = $this->db->prepare("UPDATE users SET token = :token WHERE login = :login");
         $stmt->execute(['token' => $token, 'login' => $login]);
     }
 

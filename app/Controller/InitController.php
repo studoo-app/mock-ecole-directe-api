@@ -11,6 +11,7 @@
 
 namespace Controller;
 
+use Core\ConfigDataSet;
 use Core\StandardRaw;
 use Core\TokenHandler;
 use Studoo\EduFramework\Core\Controller\ControllerInterface;
@@ -29,13 +30,8 @@ class InitController implements ControllerInterface
         }
 
         ##<< Insertion des conf dataset
-        if (file_exists(__DIR__ . '/../../var/configDataset.json')) {
-            $dataSet = json_decode(
-                file_get_contents(__DIR__ . '/../../var/configDataset.json'),
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
+        if (ConfigDataSet::get(__DIR__ . '/../../var/configDataset.json') !== false) {
+            $dataSet = ConfigDataSet::get(__DIR__ . '/../../var/configDataset.json');
 
             $db = DatabaseService::getConnect();
 
@@ -165,8 +161,9 @@ class InitController implements ControllerInterface
                     if (array_key_exists($classe, $dataSet["organisation"]["v3"]["classes"])) {
                         $idClassesTemp[] = [
                             "id" => $classe,
+                            "code" => $dataSet["organisation"]["v3"]["classes"][$classe]["code"],
                             "libelle" => $dataSet["organisation"]["v3"]["classes"][$classe]["libelle"],
-                            "code" => $dataSet["organisation"]["v3"]["classes"][$classe]["code"]
+                            "idGroupe" => 0
                         ];
                     }
                 }
@@ -207,9 +204,9 @@ class InitController implements ControllerInterface
                                                 ");
             } ##>> Insertion des professeurs dataset
 
-
+            return "{message: 'initialisation du mock API Ecole Directe'}";
         }
 
-        return "{message: 'initialisation the mock API Ecole Directe'}";
+        return "{message: 'Probleme d'initialisation du mock API Ecole Directe'}";
     }
 }

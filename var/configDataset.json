@@ -1,5 +1,7 @@
 {
   "organisation" : {
+    "nomEtablissement" : "STUDOO SCHOOL",
+    "codeOgec" : "0345587-NC",
     "v3" : {
       "promo" : "2023-2024",
       "classes" : {

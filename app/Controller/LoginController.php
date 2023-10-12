@@ -10,6 +10,7 @@
 
 namespace Controller;
 
+use Core\ConfigDataSet;
 use Core\DatabaseService;
 use Core\TokenHandler;
 use Model\LoginModel;
@@ -51,6 +52,8 @@ class LoginController implements ControllerInterface
 
                if ($user["login"] === $postTextPlain["identifiant"] && $user["password"] === $postTextPlain["motdepasse"]) {
 
+                   $dataSetConfig = ConfigDataSet::get(__DIR__ . '/../../var/configDataset.json');
+
                    $dataModelJson = json_decode(
                        file_get_contents(__DIR__ .
                            '/../Data/' . $versionAPI .
@@ -62,65 +65,48 @@ class LoginController implements ControllerInterface
                        JSON_THROW_ON_ERROR
                    );
 
+                   $dataModelJson["token"] = TokenHandler::generate(18);
+                   (new LoginModel())->addSession($dataModelJson["token"], $user["login"]);
 
                    $dataModelJson["data"]["accounts"][0]["identifiant"] = $user["login"];
-                   var_dump($dataModelJson);
+                   $dataModelJson["data"]["accounts"][0]["civilite"] = ($user["sexe"] === "F") ? "Mme." : "M.";
+                   $dataModelJson["data"]["accounts"][0]["nom"] = $user["nom"];
+                   $dataModelJson["data"]["accounts"][0]["prenom"] = $user["prenom"];
+                   $dataModelJson["data"]["accounts"][0]["typeCompte"] = $user["typeCompte"];
+                   $dataModelJson["data"]["accounts"][0]["lastConnexion"] = $user["lastConnexion"];
+                   $dataModelJson["data"]["accounts"][0]["idLogin"] = $user["idLogin"];
+                   $dataModelJson["data"]["accounts"][0]["id"] = $user["id"];
+                   $dataModelJson["data"]["accounts"][0]["email"] = $user["email"];
+                   $dataModelJson["data"]["accounts"][0]["uid"] = $user["uid"];
+                   $dataModelJson["data"]["accounts"][0]["socketToken"] = TokenHandler::generate(40);
+                   $dataModelJson["data"]["accounts"][0]["codeOgec"] = $dataSetConfig["organisation"]["codeOgec"];
+                   $dataModelJson["data"]["accounts"][0]["nomEtablissement"] = $dataSetConfig["organisation"]["nomEtablissement"];
 
+                   $dataModelJson["data"]["accounts"][0]["profile"]["nomEtablissement"] = $dataSetConfig["organisation"]["nomEtablissement"];
+                   $dataModelJson["data"]["accounts"][0]["profile"]["idEtablissement"] = $dataSetConfig["organisation"]["codeOgec"];
+                   $dataModelJson["data"]["accounts"][0]["profile"]["telPortable"] = $user["telPortable"];
 
-                   $dataModelJson["token"] = TokenHandler::generate(26);
+                   if ($user["typeCompte"] === "P") {
+                       $dataModelJson["data"]["accounts"][0]["profile"]["email"] = $user["email"];
+                       $dataModelJson["data"]["accounts"][0]["profile"]["classes"] = json_decode($user["classeId"], false, 512, JSON_THROW_ON_ERROR);
+                   }
+
+                   if ($user["typeCompte"] === "E") {
+                       $dataModelJson["data"]["accounts"][0]["profile"]["sexe"] = $user["sexe"];
+                       $dataModelJson["data"]["accounts"][0]["profile"]["rneEtablissement"] = $dataSetConfig["organisation"]["codeOgec"];
+                       $dataModelJson["data"]["accounts"][0]["profile"]["classe"] = json_decode($user["classeId"], false, 512, JSON_THROW_ON_ERROR);
+                   }
+
+                   // encodage du json du User
                    $login = json_encode(
                         $dataModelJson,
                        JSON_THROW_ON_ERROR
                    );
 
-                   (new LoginModel())->addSession($dataModelJson["token"], $login);
-
                    return $login;
                }
 
-
-/*                foreach ($loginJson["login"][$request->getVars()["api"]] as $login) {
-                    // Check Login
-                    if ($login["identifiant"] === $postTextPlain["identifiant"]
-                        && $login["motdepasse"] === $postTextPlain["motdepasse"]) {
-
-                        $dataModelJson = json_decode(
-                            file_get_contents(__DIR__ .
-                                '/../Data/' . $versionAPI .
-                                '/Model/login' . $versionAPI .
-                                'Type' . $login["typeCompte"] .
-                                '.json'),
-                            true,
-                            512,
-                            JSON_THROW_ON_ERROR
-                        );
-
-                        $dataUserJson = json_decode(
-                            file_get_contents(__DIR__ .
-                                '/../Data/' . $versionAPI .
-                                '/DataSet/login' . $versionAPI .
-                                'Type' . $login["typeCompte"] .
-                                '-' . $login["identifiant"] .
-                                '.json'),
-                            true,
-                            512,
-                            JSON_THROW_ON_ERROR
-                        );
-
-                        $dataUserJson["token"] = TokenHandler::generate(26);
-                        $login = json_encode(
-                            array_replace_recursive($dataModelJson, $dataUserJson),
-                            JSON_THROW_ON_ERROR
-                        );
-
-                        (new LoginModel())->addSession($dataUserJson["token"], $login);
-
-                        return $login;
-                    }
-                }*/
-
-
-                return "{message: 'Login/Password is not available in API " . $versionAPI ."'}";
+               return "{message: 'Login/Password is not available in API " . $versionAPI ."'}";
             } catch (\JsonException|\Exception $e) {
                 return "{message: '" . $e->getMessage() . "'}";
             }
