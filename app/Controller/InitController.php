@@ -139,7 +139,7 @@ class InitController implements ControllerInterface
                                                         '$prenom',
                                                         '" . $faker->phoneNumber() . "',
                                                         '$sexe',
-                                                        '" . $faker->email() . "',
+                                                        '" . strtolower($login . "@") . $faker->domainName() . "',
                                                         '$typeCompte',
                                                         '$idClasse',
                                                         '$login',
