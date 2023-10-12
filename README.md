@@ -53,42 +53,46 @@ Certains users sont configurés dans le fichier de configDataSet
 | JBOUVIER/test          	 | Prof     	     | 107,120,134,140,141 |
 | BDAN/test          	 | Prof     	     | 107,120             |
 
-## Pour developper le mock
-Télécharger le projet depuis GitHub et se rendre dans le dossier
-```bash
-composer install
-```
-Démarrer un serveur PHP
-```bash
-php -S localhost:9042 -t api
-```
+## Personnalisation du mock
 
-## Pour developper l'image Docker
+Voici les étapes à suivre :
 
-Télécharger le projet depuis GitHub et se rendre dans le dossier
-```bash
-composer install
-```
+### Faire un fichier "docker-compose.yml"
 
-### Build
-```bash
-docker-compose build --no-cache
+```yaml
+version: "3"  
+services:
+  api:  
+    container_name: mock-api-ecole-directe  
+    image: bfoujols/mock-api-ecole-directe:latest  
+    ports:  
+      - "9042:80"
+    volumes:  
+      - ./var/dbdataset:/var/www/mock-ecole-directe-api/var  
+volumes:  
+  dbdata:
 ```
 
-### Start
-```bash
-docker-compose up -d
+### Télécharger le fichier de configuration du DataSet
+
+```
+curl -fsS https://raw.githubusercontent.com/studoo-app/mock-ecole-directe-api/main/var/configDataset.json > var/configDataset.json
 ```
 
+### Démarrer les containers Docker
 
-### Deploy sur Docker Hub
-
-Vous devez la taguer avec votre nom d'utilisateur Docker Hub ou le nom de votre registre privé, ainsi qu'un nom de référentiel et un tag
-```bash
-docker tag mock-ecole-directe-api-app bfoujols/mock-api-ecole-directe:<VERSION>
+```
+docker compose up -d
 ```
 
-Maintenant, vous pouvez pousser l'image vers le registre en utilisant la commande "docker push"
-```bash
-docker push bfoujols/mock-api-ecole-directe:<VERSION>
+### Générer le DataSet
+
 ```
+http://localhost:9042/init
+```
+
+Le fichier de configuration "configDataset.json" peut être personnalisé :
+- Ajouter des étudiants fixes
+- Ajouter des classes
+- Ajouter des profs
+
