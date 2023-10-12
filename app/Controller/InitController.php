@@ -47,6 +47,7 @@ class InitController implements ControllerInterface
             $db->exec("CREATE TABLE IF NOT EXISTS users (
                                 id INTEGER PRIMARY KEY,
                                 idLogin INTEGER,
+                                idClasse INTERGER,
                                 nom TEXT,
                                 prenom TEXT,
                                 telPortable TEXT,
@@ -79,6 +80,7 @@ class InitController implements ControllerInterface
                 if (array_key_exists('etudiants', $classe)) {
                     foreach ($classe['etudiants'] as $etudiant)
                     $db->exec("INSERT INTO users (   idLogin, 
+                                                               idClasse,
                                                                nom, 
                                                                prenom, 
                                                                telPortable, 
@@ -93,6 +95,7 @@ class InitController implements ControllerInterface
                                                                lastConnexion, 
                                                                anneeScolaireCourante) 
                                         VALUES (    '" . $etudiant['idLogin'] . "',
+                                                    '" . $id . "',
                                                     '" . $etudiant['nom'] . "',
                                                     '" . $etudiant['prenom'] . "',
                                                     '" . $etudiant['telPortable'] . "',
@@ -119,7 +122,8 @@ class InitController implements ControllerInterface
                     $prenom = $faker->firstName($genre[$posGenre]);
                     $sexe = strtoupper(substr($genre[$posGenre], 0, 1));
                     $login = (new \Core\StandardRaw)->normalizeSRString(substr($prenom, 0, 1)).(new \Core\StandardRaw)->normalizeSRString($nom).$faker->numberBetween(1000, 9999);
-                    $db->exec("INSERT INTO users (   idLogin, 
+                    $db->exec("INSERT INTO users (   idLogin,
+                                                               idClasse,
                                                                nom, 
                                                                prenom, 
                                                                telPortable, 
@@ -135,6 +139,7 @@ class InitController implements ControllerInterface
                                                                anneeScolaireCourante
                                                                ) 
                                             VALUES (    " . $faker->numberBetween(1000, 999999) . ",
+                                                        " . $id . ",
                                                         '$nom',
                                                         '$prenom',
                                                         '" . $faker->phoneNumber() . "',
