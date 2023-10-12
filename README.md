@@ -22,24 +22,36 @@ Vous pouvez tester l'API via Insomnia :
 
 ## Utilisation de l'API Ecole Directe Mock
 
-Ce mock auto-génère des données aléatoires pour les tokens authentifications :
+Ce mock auto-génère des données à travers des fakers :
+
+### API : /dataset/classes
+
+Visualisation des données des classes
+
+### API : /dataset/etudiants
+
+Visualisation des données des étudiants
+
+### API : /dataset/profs
+
+Visualisation des données des profs
 
 ### API : /login
 
-| Login/Password     	     | Role              	 | Niveau              	    | Id Niveau     |
-|--------------------------|----------------|--------------------------|---------------|
-| flore/test          	    | Etudiante    	 | BTS SIO 1 année A (1TSSIOA) | 107           |
-| julie/test          	    | Etudiante    	 | BTS SIO 1 année B (1TSSIOB) | 150           |
-| nico/test          	     | Etudiant    	 | BTS SIO 2 année (2TSSIOSLAM) | 102           |
-| jeremy/test          	   | Etudiant    	 | MASTER 2 (MS2D2ALT)      | 140           |
-| jbouvier/test          	 | Prof     	     | BTS SIO ADM              | 107, 102, 140 |
-| bdan/test          	     | Prof     	     | BTS SIO ADM              | 107, 150      |
+Certains users sont configurés dans le fichier de configDataSet
+
+| Login/Password     	     | Role              	 | Niveau              	        | Id Niveau     |
+|--------------------------|----------------|------------------------------|---------------|
+| FPELTIER/test          	    | Etudiante    	 | BTS SIO 1 année A (1TSSIOA)  | 107           |
+| PTORRE/test          	     | Etudiante    	 | BTS SIO 1 année A (1TSSIOA)  | 107           |
+| JBOULLAM/test          	     | Etudiant    	 | Bachelor CSI | 140           |
 
 ### API : /classes
 
-| Login/Password     	     | Role              	 | Niveau              	    | Id Niveau     |
-|--------------------------|----------------|--------------------------|---------------|
-| jbouvier/test          	 | Prof     	     | BTS SIO ADM              | 107 |
+| Login/Password     	     | Role              	 | Id Classe           |
+|--------------------------|----------------|---------------------|
+| JBOUVIER/test          	 | Prof     	     | 107,120,134,140,141 |
+| BDAN/test          	 | Prof     	     | 107,120             |
 
 ## Pour developper le mock
 Télécharger le projet depuis GitHub et se rendre dans le dossier
