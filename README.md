@@ -63,28 +63,32 @@ La variable "ports" est le port (9042) accessible depuis l'extérieur de Docker.
 Le volume sert à rendre accessible dans votre projet les fichiers de configuration et la base de données SQLite.
 
 ```yaml
-version: "3"  
+version: "3"
 services:
-  api:  
-    container_name: mock-api-ecole-directe  
-    image: bfoujols/mock-api-ecole-directe:latest  
-    ports:  
+  api:
+    container_name: mock-api-ecole-directe
+    image: bfoujols/mock-api-ecole-directe:latest
+    ports:
       - "9042:80"
-    volumes:  
-      - ./var/dbdataset:/var/www/mock-ecole-directe-api/var  
-volumes:  
+    volumes:
+      - ./var/dbdataset:/var/www/mock-ecole-directe-api/var
+volumes:
   dbdata:
 ```
 
 ### Télécharger le fichier de configuration du DataSet
 
-Pour permettre la personnalisation, vous devez télécharger le modèle de configuration via l'URL suivante.
+Pour permettre la personnalisation, vous devez télécharger le modèle de configuration via l'URL suivante :
+- Création du dossier dbdataset dans le dossier var/
+```bash
+mkdir var/dbdataset
 ```
+- Téléchargement du fichier de configuration
+```bash
 curl -fsS https://raw.githubusercontent.com/studoo-app/mock-ecole-directe-api/main/var/configDataset.json > var/dbdataset/configDataset.json
 ```
 
 Ce modèle exemple vous servira à comprendre les différents paramètres pour :
-
 #### Personnaliser l'établissement
 Vous pouvez personnaliser votre établissement :
 ```json
