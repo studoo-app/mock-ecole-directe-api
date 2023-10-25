@@ -84,6 +84,12 @@ Pour permettre la personnalisation, vous devez télécharger le modèle de confi
 mkdir var/dbdataset
 ```
 - Téléchargement du fichier de configuration
+Pour windows
+```bash
+wget "https://raw.githubusercontent.com/studoo-app/mock-ecole-directe-api/main/var/configDataset.json" > var/dbdataset/configDataset.json
+```
+
+Pour linux et macos
 ```bash
 curl -fsS https://raw.githubusercontent.com/studoo-app/mock-ecole-directe-api/main/var/configDataset.json > var/dbdataset/configDataset.json
 ```
